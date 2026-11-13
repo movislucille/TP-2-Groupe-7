@@ -1,0 +1,32 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class GenerateurEmploiDuTemps {
+  + generer(seances, creneaux, salles) : boolean
+  - estValide(s : SeanceTD, c : Creneau, r : Salle) : boolean
+  + detecterConflits() : List
+}
+
+class Creneau {
+  - jour : String
+  - heureDebut : Time
+  - heureFin : Time
+}
+
+class SeanceTD {
+  + programmer()
+  + affecterResponsable(ens : Enseignant)
+}
+
+class Salle {
+  - nom : String
+  - capacite : int
+}
+
+SeanceTD "*" -- "1" Creneau : placée sur
+SeanceTD "*" -- "1" Salle : accueille
+GenerateurEmploiDuTemps ..> SeanceTD : place
+GenerateurEmploiDuTemps ..> Creneau : parcourt
+GenerateurEmploiDuTemps ..> Salle : parcourt
+@enduml

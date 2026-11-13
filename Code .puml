@@ -1,0 +1,50 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+enum Niveau {
+  L1
+  L2
+  L3
+}
+
+class Etudiant {
+  - matricule : string
+  - nom : string
+  - prenom : string
+  - niveau : Niveau
+  + ajouterNote(n : Note)
+  + moyenneUE(ue : UE) : double
+  + moyenneGenerale() : double
+  + valideUE(ue : UE) : bool
+  + afficherReleve()
+}
+
+class Filiere {
+  - nom : string
+  + ajouterUE(ue : UE)
+}
+
+class UE {
+  - code : string
+  - intitule : string
+  - credits : int
+  + ajouterMatiere(m : Matiere)
+}
+
+class Matiere {
+  - code : string
+  - intitule : string
+}
+
+class Note {
+  - valeur : double
+}
+
+Filiere "1" o-- "0..*" Etudiant : accueille
+Filiere "1" *-- "1..*" UE : comporte
+UE "1" *-- "1..*" Matiere : est composée de
+Etudiant "1" *-- "0..*" Note : possède
+Note "0..*" --> "1" Matiere : porte sur
+Etudiant --> Niveau
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+actor "Responsable de TD" as R
+actor "Enseignant" as E
+actor "Étudiant" as S
+
+rectangle "Plateforme de gestion des TD" {
+  usecase "Enregistrer les matières" as UC1
+  usecase "Créer des groupes de TD" as UC2
+  usecase "Affecter des étudiants\nà des groupes" as UC3
+  usecase "Programmer les séances de TD" as UC4
+  usecase "Affecter un enseignant ou\nun responsable à une séance" as UC5
+  usecase "Enregistrer les présences\net absences" as UC6
+  usecase "Consulter le calendrier des TD" as UC7
+  usecase "Produire un bilan des présences" as UC8
+}
+
+R --> UC1
+R --> UC2
+R --> UC3
+R --> UC4
+R --> UC5
+R --> UC7
+R --> UC8
+E --> UC6
+E --> UC7
+S --> UC7
+
+UC4 ..> UC5 : <<include>>
+@enduml

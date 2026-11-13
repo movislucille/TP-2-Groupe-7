@@ -1,0 +1,19 @@
+@startuml
+skinparam shadowing false
+
+start
+:Consulter le calendrier des TD;
+:Démarrer la séance;
+:Dérouler les exercices du TD;
+:Afficher la liste du groupe;
+repeat
+  if (Étudiant présent ?) then (oui)
+    :Marquer présent;
+  else (non)
+    :Marquer absent;
+  endif
+repeat while (Autres étudiants ?) is (oui) not (non)
+:Valider les présences;
+:Clôturer la séance;
+stop
+@enduml

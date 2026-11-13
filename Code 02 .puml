@@ -1,0 +1,57 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class Etudiant {
+  - matricule : String
+  - nom : String
+  - prenom : String
+  - email : String
+  + calculerTauxPresence() : float
+}
+
+class GroupeTD {
+  - nom : String
+  + ajouterEtudiant(e : Etudiant)
+  + retirerEtudiant(e : Etudiant)
+  + bilanPresences() : float
+}
+
+class Matiere {
+  - code : String
+  - intitule : String
+}
+
+class Enseignant {
+  - nom : String
+  - prenom : String
+  - email : String
+}
+
+class Salle {
+  - nom : String
+  - capacite : int
+}
+
+class SeanceTD {
+  - date : Date
+  - heureDebut : Time
+  - heureFin : Time
+  + programmer()
+  + affecterResponsable(ens : Enseignant)
+  + enregistrerPresences()
+}
+
+class Presence {
+  - estPresent : Boolean
+  + marquer(present : Boolean)
+}
+
+Etudiant "*" -- "1" GroupeTD : appartient à
+GroupeTD "1" -- "*" SeanceTD : suit
+Matiere "1" -- "*" SeanceTD : concerne
+Enseignant "1" -- "*" SeanceTD : anime
+Salle "1" -- "*" SeanceTD : accueille
+SeanceTD "1" *-- "*" Presence : enregistre
+Etudiant "1" -- "*" Presence : concerne
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+autonumber
+skinparam shadowing false
+
+actor "Responsable de TD" as R
+participant "Plateforme" as P
+participant "Salle" as S
+participant "Enseignant" as E
+participant "SeanceTD" as T
+
+R -> P : demanderProgrammation()
+P --> R : afficherFormulaire()
+R -> P : saisirSeance(groupe, matière, date, heures, salle)
+P -> S : rechercherSalle(salle)
+S --> P : salle
+P -> T : programmer(groupe, matière, date, heures, salle)
+T --> P : séance créée
+P --> R : demanderResponsable()
+R -> P : choisirResponsable(enseignant)
+P -> E : rechercherEnseignant(enseignant)
+E --> P : enseignant
+P -> T : affecterResponsable(enseignant)
+T --> P : séance mise à jour
+P --> R : confirmerProgrammation()
+@enduml
